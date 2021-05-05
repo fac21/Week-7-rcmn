@@ -1,6 +1,8 @@
 const express = require("express");
 const home = require('./routes/home');
 const login = require('./routes/login');
+const logout = require('./routes/logout');
+const signUp = require('./routes/signup');
 
 
 const server = express();
@@ -12,10 +14,10 @@ server.use(staticHandler);
 const cookieParser = require("cookie-parser");
 const bodyParser = express.urlencoded({ extended: false });
 
-const signUp = require('./routes/signup')
+
 
 server.use(cookieParser(process.env.COOKIE_SECRET));
-server.use(bodyParser)
+server.use(bodyParser);
 
 
 server.get("/sign-up", signUp.get)
@@ -23,7 +25,8 @@ server.post("/sign-up", signUp.post)
 server.get("/", home.get);
 
 server.get("/log-in", login.get);
+server.post("/log-in", login.post);
 
-
+server.post("/log-out", logout.post);
 
 server.listen(PORT, () => console.log(`started on http://localhost:${PORT}`));
