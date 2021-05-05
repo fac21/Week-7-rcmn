@@ -1,5 +1,6 @@
 const express = require("express");
 const home = require('./routes/home');
+const login = require('./routes/login');
 
 const server = express();
 
@@ -12,6 +13,8 @@ const bodyParser = express.urlencoded();
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get("/", home.get);
+
+server.get("/log-in", login.get);
 
 
 
