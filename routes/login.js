@@ -1,4 +1,5 @@
 const template = require("../template");
+const auth = require("../auth");
 
 function get(request, response) {
     const loginForm = `
@@ -16,4 +17,21 @@ function get(request, response) {
     response.send(template("", loginForm));
 }
 
-module.exports = { get };
+function post(request, response) {
+    const { email, password } = request.body;
+    auth
+        .verifyUser(email, password) //verifying the user
+        .then(auth.saveUserSession) //creating a random session id
+        .then((sid) => {
+            response.cookie("sid", sid, auth.COOKIE_OPTIONS);
+            response.redirect("/photos");
+        })
+        .catch((error) => { //this catches any error that happens anytime in the promise
+            console.error(error);
+            response.send(`<h1>We couldn't find an account with that email address!</h1>
+            <p>Please sign up <a href="/signup">here</a>`);
+        });
+    }
+
+
+module.exports = { get, post };
