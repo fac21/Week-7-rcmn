@@ -1,0 +1,31 @@
+{
+  "name": "Week-7-rcmn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fac21/Week-7-rcmn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fac21/Week-7-rcmn/issues"
+  },
+  "homepage": "https://github.com/fac21/Week-7-rcmn#readme",
+  "dependencies": {
+    "dotenv": "^8.5.1",
+    "express": "^4.17.1",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {
+    "cypress": "^7.2.0",
+    "nodemon": "^2.0.7"
+  }
+}
