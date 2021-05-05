@@ -37,7 +37,7 @@ INSERT INTO sessions (sid, data) VALUES
 );
 
 INSERT INTO photos ( user_id, photo, title, tag, created_at) VALUES
-  (1, pg_read_file('../public/cat.jpg'), 'Holiday in Greece last year', 'Greece', (SELECT CURRENT_TIMESTAMP)),
-  (2, pg_read_file('../public/cat.jpg'), 'Visiting London', 'London', (SELECT CURRENT_TIMESTAMP));
+  (1, pg_read_binary_file('../public/cat.jpg'), 'Holiday in Greece last year', 'Greece', (SELECT CURRENT_TIMESTAMP)),
+  (2, pg_read_binary_file('../public/cat.jpg'), 'Visiting London', 'London', (SELECT CURRENT_TIMESTAMP));
 
 COMMIT;
