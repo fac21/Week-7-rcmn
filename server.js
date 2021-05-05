@@ -4,6 +4,7 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const signUp = require('./routes/signup');
 
+
 const server = express();
 const PORT = process.env.PORT || 3000;
 const staticHandler = express.static("public");
@@ -19,8 +20,8 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 server.use(bodyParser);
 
 
-server.get("/signup", signUp.get)
-server.post("/signup", signUp.post)
+server.get("/sign-up", signUp.get)
+server.post("/sign-up", signUp.post)
 server.get("/", home.get);
 
 server.get("/log-in", login.get);

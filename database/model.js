@@ -1,3 +1,4 @@
+
 const db = require("./connection");
 
 function getUser(email) {
@@ -6,13 +7,15 @@ function getUser(email) {
     .then((result) => result.rows[0]);
 }
 
-function createSession() {
-    const insertSession = `INSERT INTO sessions (sid, data) VALUES ($1, $2) RETURNING sid`;
+function createSession(sid, data) {
+    const INSERT_SESSION = `
+      INSERT INTO sessions (sid, data) VALUES ($1, $2)
+      RETURNING sid
+    `;
     return db
-            .query(insertSession, [sid, dataObject])
-            // .then((result) => console.log(result.rows[0].sid))
-           .then((result) => result.rows[0].sid);
-}
+      .query(INSERT_SESSION, [sid, data])
+      .then((result) => result.rows[0].sid);
+  }
 
 function deleteSession(sid) {
     const DELETE_SESSION = `DELETE FROM sessions WHERE sid = $1`;
@@ -26,4 +29,17 @@ function getUserSessionData(sid) {
   return db.query(SELECT_SESSION_DATA, [sid]).then((result) => result.rows[0]);
 }
 
-module.exports = { getUser, createSession, deleteSession, getUserSessionData };
+function createUser(email, hash, name) {
+    const INSERT_USER = `
+      INSERT INTO users (email, password, name) VALUES ($1, $2, $3)
+      RETURNING id, email, name
+    `;
+    return db
+      .query(INSERT_USER, [email, hash, name])
+      .then((result) => result.rows[0]);
+  }
+
+ 
+
+module.exports = { createUser, getUser, createSession, deleteSession, getUserSessionData };
+
