@@ -1,8 +1,13 @@
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const template = require("../template");
+const db = require('../database/connection');
+const auth = require('../auth');
+
 
 function get (request, response){
-const html = `
-<form action="/signup" method="POST">
+const signUpForm = `
+<h1>Sign Up</h1>
+<form action="/sign-up" method="POST">
 <label for="email">Email</label> 
 <input type="email" name="email" id="email" required>
 
@@ -13,28 +18,25 @@ const html = `
 <input type="password" name="password" id="password" required>
 <button type="submit">Sign up</button>
 </form>
-</body>
-</html>
 `
-response.send(html)
+response.send(template("", signUpForm));
 } 
 
-function hashPassword(password){
 
-}
+function post(request, response) {
+    const { name, email, password } = request.body;
+    auth
+    .createUser(email, password, name)
+    .then((user) => auth.saveUserSession(user))
+    .then((sid) => {
+      response.cookie("sid", sid, auth.COOKIE_OPTIONS);
+      response.redirect("/")
+    })
+    .catch((error) => {
+      console.error(error);
+      response.send(`<h1>Something went wrong</h1>`);
+    })
+  }
 
-
-
-function post (request, response){
-const data = request.body
-hashPassword(data.password)
-}
-
-//data
-//hash the pw
-//insert data into users table return data
-// pass in data and make a random sid 
-//insert sid and data into sessions table
-//set cookie with sid
 
 module.exports = { get, post}
