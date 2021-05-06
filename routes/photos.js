@@ -85,7 +85,7 @@ function post(req, res) {
       .getUserId(sid)
       .then((userId) => {
         model.addPhotoToDatabase(userId, title, tag, file.buffer);
-        res.redirect("/")})
+        res.redirect("/photos")})
       .catch((error) => {
         //this catches any error that happens anytime in the promise
         console.error(error);

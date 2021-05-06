@@ -6,29 +6,37 @@ const auth = require('../auth');
 
 function get (request, response){
 const signUpForm = `
-<h2>Sign Up</h2>
-<form action="/sign-up" method="POST">
-<label for="email">
-Email
-<span aria-hidden="true">*</span>
-</label> 
-<input type="email" name="email" id="email" required>
+  <h2>Sign Up</h2>
+  <form action="/sign-up" method="POST" class = 'center'>
+  <label for="email">
+    Email
+  <span aria-hidden="true">*</span>
+  </label> 
+  <input type="email" name="email" id="email" required>
 
-<label for="name">
-Name
-<span aria-hidden="true">*</span>
-</label>
-<input type="text" name="name" id="name" required>
+  <label for="name">
+    Name
+  <span aria-hidden="true">*</span>
+  </label>
+  <input type="text" name="name" id="name" required>
 
-<label for="password">
-Password
-<span aria-hidden="true">*</span>
-</label>
-<input type="password" name="password" id="password" required>
-<button type="submit">Sign up</button>
-</form>
-`
-response.send(template("TRAVELOG", signUpForm));
+  <label for="password">
+    Password
+  <span aria-hidden="true">*</span>
+  </label>
+  <div id="passwordRequirements" class="requirements">
+      Passwords must contain at least one number.
+  </div>
+  <input 
+    type="password" 
+    name="password" 
+    id="password" 
+    aria-describedby="passwordRequirements passwordError"
+    minlength='1' />
+  <button type="submit">Sign up</button>
+  </form>
+  `
+  response.send(template("TRAVELOG", signUpForm));
 } 
 
 
