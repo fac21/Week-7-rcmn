@@ -11,7 +11,7 @@ function getTemplate(title, content) {
     <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
     <title>${title}</title>
   </head>
-  <body>
+  <body class = 'center'>
     <h1>${title}</h1>
     ${content}
   </body>
