@@ -4,7 +4,7 @@ const crypto = require("crypto")
 
   const COOKIE_OPTIONS = {
     httpOnly: true,
-    maxAge: 600000,
+    maxAge: 1000000 * 60,
     sameSite: "strict",
     signed: true,
   };
