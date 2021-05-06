@@ -3,7 +3,7 @@ const auth = require("../auth");
 
 function get(request, response) {
     const loginForm = `
-    <h1>Log in</h1>
+    <h2>Log in</h2>
     <form action="log-in" method="POST">
       <label for="email">Email</label>
       <input type="email" id="email" name="email">
@@ -14,7 +14,7 @@ function get(request, response) {
       <button type="submit">Log in</button>
     </form>
     `
-    response.send(template("", loginForm));
+    response.send(template("TRAVELOG", loginForm));
 }
 
 function post(request, response) {

@@ -6,7 +6,7 @@ const auth = require('../auth');
 
 function get (request, response){
 const signUpForm = `
-<h1>Sign Up</h1>
+<h2>Sign Up</h2>
 <form action="/sign-up" method="POST">
 <label for="email">
 Email
@@ -28,7 +28,7 @@ Password
 <button type="submit">Sign up</button>
 </form>
 `
-response.send(template("", signUpForm));
+response.send(template("TRAVELOG", signUpForm));
 } 
 
 
