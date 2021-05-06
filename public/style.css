@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: url('city.svg');
+}
+
 .center {
     display: flex;
     flex-direction: column;
@@ -16,5 +20,9 @@
 
 .flex-row {
     display: flex;
-    
+    gap: 2rem;
+}
+
+.stack > * + * {
+    margin-top: 2rem;
 }
