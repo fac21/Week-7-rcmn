@@ -13,7 +13,7 @@ function getTemplate(title, content) {
   </head>
   <body class = 'center stack'>
  
-    <h1>${title}</h1>
+    <h1 class = 'margin-top'>${title}</h1>
     ${content}
     
     
