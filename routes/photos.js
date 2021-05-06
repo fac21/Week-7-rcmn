@@ -2,14 +2,6 @@ const express = require("express");
 const multer = require("multer");
 const model = require("../database/model.js");
 
-const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
-const ALLOWED_TYPES = [
-  "image/jpeg",
-  "image/png",
-  "image/svg",
-  "image/pdf",
-  "image/gif",
-];
 
 
 const server = express();
@@ -19,7 +11,7 @@ const server = express();
 
 function get(req, res) {
   model.getPhoto()
-  .then((photos) => {
+  .then((photos) => { 
     const photosArr = Object.keys(photos);
     res.send(`
       <h2>Gallery</h2>
@@ -58,6 +50,16 @@ function get(req, res) {
   })
 }
 
+const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
+const ALLOWED_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/svg",
+  "image/pdf",
+  "image/gif",
+];
+
+
 function post(req, res) {
   const file = req.file;
 
@@ -79,18 +81,15 @@ function post(req, res) {
     // model.createUser(email, name, file.buffer);
     const sid = req.signedCookies.sid;
     model
-      .getUserName(sid)
-      .then((name) => model.getId(name))
-      .then((userId) =>
-        model.addPhotosToDatabase(userId, title, tag, file.buffer)
-      )
-      .then((res) => {
-        res.redirect("/");
-      })
+      .getUserId(sid)
+      .then((id) => model.getUserId(id))
+      .then((userId) =>{
+        model.addPhotoToDatabase(userId, title, tag, file.buffer)
+        res.redirect("/")})
       .catch((error) => {
         //this catches any error that happens anytime in the promise
         console.error(error);
-        response.send(`<h1>Oops try uplading again!</h1>`);
+        res.send(`<h1>Oops try uploading again!</h1>`);
       });
   }
 }
