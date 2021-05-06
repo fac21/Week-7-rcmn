@@ -36,6 +36,7 @@ INSERT INTO sessions (sid, data) VALUES
   '{"test":"stuff"}'
 );
 
+
 INSERT INTO photos ( user_id, photo, title, tag, created_at) VALUES
 (
       1, pg_read_binary_file('/Users/chunzhang/Week-7-rcmn/public/cat.jpg'), 'Holiday in Greece last year', 'Greece', (SELECT CURRENT_TIMESTAMP)

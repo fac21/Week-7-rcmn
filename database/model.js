@@ -29,6 +29,7 @@ function getUserSessionData(sid) {
   return db.query(SELECT_SESSION_DATA, [sid]).then((result) => result.rows[0]);
 }
 
+
 function createUser(email, hash, name) {
     const INSERT_USER = `
       INSERT INTO users (email, password, name) VALUES ($1, $2, $3)
@@ -39,6 +40,23 @@ function createUser(email, hash, name) {
       .then((result) => result.rows[0]);
   }
 
+  function getUserName(sid) {
+    const SELECT_SESSION_DATA = `
+        SELECT data FROM sessions WHERE sid = $1
+    `;
+  return db.query(SELECT_SESSION_DATA, [sid]).then((result) => result.rows[0].name);
+  }
+
+  function getId(name){
+    return db.query(`SELECT ID FROM USERS WHERE NAME = $1 RETURNING ID`, [name]).then((result) => result.rows[0]);
+  }
+
+
+ 
+function addPhotoToDatabase (userId, title, tag, photo){
+return db.query(`INSERT INTO PHOTOS (user_id, photo, title, tag,  created_at) VALUES ($1, $2, $3, $4) `, [[userID, title, tag, photo]])
+}
+
 function getPhoto() {
   const GET_PHOTO = `
   SELECT photo, title, tag FROM photos
@@ -48,6 +66,8 @@ function getPhoto() {
     .then(result => result.rows[0])
 }
 
-module.exports = 
-{ createUser, getUser, createSession, deleteSession, getUserSessionData, getPhoto };
+
+
+module.exports = { createUser, getUser, createSession, deleteSession, getUserSessionData, getUserName,  addPhotoToDatabase, getId, getPhoto };
+
 
