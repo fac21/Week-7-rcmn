@@ -3,6 +3,7 @@ const home = require('./routes/home');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const signUp = require('./routes/signup');
+const photos = require('./routes/photos');
 
 
 const server = express();
@@ -28,5 +29,7 @@ server.get("/log-in", login.get);
 server.post("/log-in", login.post);
 
 server.post("/log-out", logout.post);
+
+server.get("/photos", photos.get);
 
 server.listen(PORT, () => console.log(`started on http://localhost:${PORT}`));

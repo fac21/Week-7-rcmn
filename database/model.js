@@ -39,7 +39,15 @@ function createUser(email, hash, name) {
       .then((result) => result.rows[0]);
   }
 
- 
+function getPhoto() {
+  const GET_PHOTO = `
+  SELECT photo, title, tag FROM photos
+  `;
+  return db 
+    .query(GET_PHOTO)
+    .then(result => result.rows[0])
+}
 
-module.exports = { createUser, getUser, createSession, deleteSession, getUserSessionData };
+module.exports = 
+{ createUser, getUser, createSession, deleteSession, getUserSessionData, getPhoto };
 
