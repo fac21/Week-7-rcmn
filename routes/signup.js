@@ -7,7 +7,7 @@ const auth = require('../auth');
 function get (request, response){
 const signUpForm = `
 <h2>Sign Up</h2>
-<form action="/sign-up" method="POST">
+<form action="/sign-up" method="POST" class = 'center'>
 <label for="email">
 Email
 <span aria-hidden="true">*</span>
@@ -24,7 +24,13 @@ Name
 Password
 <span aria-hidden="true">*</span>
 </label>
-<input type="password" name="password" id="password" required>
+<div id="passwordRequirements" class="requirements">
+        Passwords must contain at least one number.
+      </div>
+<input type="password" name="password" id="password" 
+aria-describedby="passwordRequirements passwordError"
+        required
+        pattern=".*\d.*">
 <button type="submit">Sign up</button>
 </form>
 `
