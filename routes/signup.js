@@ -8,13 +8,22 @@ function get (request, response){
 const signUpForm = `
 <h1>Sign Up</h1>
 <form action="/sign-up" method="POST">
-<label for="email">Email</label> 
+<label for="email">
+Email
+<span aria-hidden="true">*</span>
+</label> 
 <input type="email" name="email" id="email" required>
 
-<label for="name">Name</label>
+<label for="name">
+Name
+<span aria-hidden="true">*</span>
+</label>
 <input type="text" name="name" id="name" required>
 
-<label for="password">Password</label>
+<label for="password">
+Password
+<span aria-hidden="true">*</span>
+</label>
 <input type="password" name="password" id="password" required>
 <button type="submit">Sign up</button>
 </form>

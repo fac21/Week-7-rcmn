@@ -1,4 +1,5 @@
-const template = require('../template')
+const template = require('../template');
+const model = require('../database/model');
 
 function get(request, response) {
   const sid = request.signedCookies.sid;
