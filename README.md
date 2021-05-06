@@ -56,7 +56,9 @@ To get a full path name for file (Mac users sorry Windows!):
 
 ![](https://i.imgur.com/nHpi4e6.png)
 
+## We struggled a lot:
 
+With displaying the photo gallery and the uploading correctly the images.
 
 
 ## Questions and answers
