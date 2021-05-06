@@ -5,10 +5,9 @@ function get(request, response) {
   const sid = request.signedCookies.sid;
   if(!sid) {
   const loggedOutHtml = `
-      <h2><img class='logo' src='logo.png' alt="logo"></h2>
       <section class = 'flex-row'>
         <a href="/sign-up">Sign up</a>
-        <span> | </span>
+        
         <a href="/log-in">Log in</a>
       </section>
       `;
