@@ -4,7 +4,7 @@ const auth = require("../auth");
 function get(request, response) {
     const loginForm = `
     <h2>Log in</h2>
-    <form action="log-in" method="POST" class = 'center'>
+    <form action="log-in" method="POST" class = 'center stack-sm'>
       <label for="email">Email<span aria-hidden="true">*</span></label>
       <input type="email" id="email" name="email" required>
 
