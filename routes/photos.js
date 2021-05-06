@@ -10,9 +10,10 @@ const server = express();
 // this is required for file uploads
 
 function get(req, res) {
-  model.getPhoto()
+  model.getPhotoData()
   .then((photos) => { 
-    const photosArr = Object.keys(photos);
+   
+    const photosArr = Object.values(photos);
     res.send(`
       <h2>Gallery</h2>
       <form enctype="multipart/form-data" method="post">
@@ -42,7 +43,7 @@ function get(req, res) {
         ${photosArr.map(photos => `
           <li>
             <h2>${photos.title}</h2>
-            <img src="/photos/${photos.photo}/photo" alt="" width="64" height="64">
+            <img src="${photos.photo}" alt="" width="64" height="64">
           </li>
         `).join("")}
      </ul>
@@ -82,9 +83,8 @@ function post(req, res) {
     const sid = req.signedCookies.sid;
     model
       .getUserId(sid)
-      .then((id) => model.getUserId(id))
-      .then((userId) =>{
-        model.addPhotoToDatabase(userId, title, tag, file.buffer)
+      .then((userId) => {
+        model.addPhotoToDatabase(userId, title, tag, file.buffer);
         res.redirect("/photos")})
       .catch((error) => {
         //this catches any error that happens anytime in the promise
@@ -94,7 +94,11 @@ function post(req, res) {
   }
 }
 
-
+server.get("/photos/:id", (req, res) => {
+    model.getPhotoData().then(photoData => {
+      res.send(photoData.photo);
+    })
+  })
 
 
 
