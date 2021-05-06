@@ -57,7 +57,17 @@ function addPhotoToDatabase (userId, title, tag, photo){
 return db.query(`INSERT INTO PHOTOS (user_id, photo, title, tag,  created_at) VALUES ($1, $2, $3, $4) `, [[userID, title, tag, photo]])
 }
 
+function getPhoto() {
+  const GET_PHOTO = `
+  SELECT photo, title, tag FROM photos
+  `;
+  return db 
+    .query(GET_PHOTO)
+    .then(result => result.rows[0])
+}
 
 
-module.exports = { createUser, getUser, createSession, deleteSession, getUserSessionData, getUserName,  addPhotoToDatabase, getId };
+
+module.exports = { createUser, getUser, createSession, deleteSession, getUserSessionData, getUserName,  addPhotoToDatabase, getId, getPhoto };
+
 

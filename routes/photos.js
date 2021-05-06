@@ -1,4 +1,7 @@
-const model = require("../database/model");
+const express = require("express");
+const multer = require("multer");
+const model = require("../database/model.js");
+
 const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
 const ALLOWED_TYPES = [
   "image/jpeg",
@@ -7,6 +10,53 @@ const ALLOWED_TYPES = [
   "image/pdf",
   "image/gif",
 ];
+
+
+const server = express();
+
+// note <form> uses enctype="multipart/form-data"
+// this is required for file uploads
+
+function get(req, res) {
+  model.getPhoto()
+  .then((photos) => {
+    const photosArr = Object.keys(photos);
+    res.send(`
+      <h2>Gallery</h2>
+      <form enctype="multipart/form-data" method="post">
+        <p>
+          <label for="photo">Upload your photo</label>
+          <input type="file" id="photo" name="photo">
+        </p>
+        <p>
+          <label for="title">Caption your photo</label>
+          <input type="text" id="title" name="title">
+        </p>
+        <p>
+          <label for="tag">Tag</label>
+          <select name="tag" id="tag">
+            <option value="nature">Nature</option>
+            <option value="city">City</option>
+            <option value="seaside">Seaside</option>
+            <option value="park">Park</option>
+            <option value="other">Other</option>
+          </select>
+        </p>
+        <p><button>Upload</button></p>
+      </form>
+
+      <ul>
+
+        ${photosArr.map(photos => `
+          <li>
+            <h2>${photos.title}</h2>
+            <img src="/photos/${photos.photo}/photo" alt="" width="64" height="64">
+          </li>
+        `).join("")}
+     </ul>
+    `)
+  })
+}
 
 function post(req, res) {
   const file = req.file;
@@ -45,4 +95,9 @@ function post(req, res) {
   }
 }
 
-module.exports = { post };
+
+
+
+
+module.exports = { get, post }
+

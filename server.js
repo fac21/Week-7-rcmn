@@ -3,7 +3,8 @@ const home = require('./routes/home');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const signUp = require('./routes/signup');
-const photos = require("./routes/photos");
+const photos = require('./routes/photos');
+
 
 
 const server = express();
@@ -31,7 +32,9 @@ server.post("/log-in", login.post);
 
 server.post("/log-out", logout.post);
 
-// server.get("/photos", photos.get)
+server.get("/photos", photos.get);
 server.post("/photos",multer.single("photo"),  photos.post)
+
+
 
 server.listen(PORT, () => console.log(`started on http://localhost:${PORT}`));
