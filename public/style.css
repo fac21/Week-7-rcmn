@@ -6,6 +6,8 @@
 
 body {
     background-image: url('city.svg');
+    background-repeat: repeat-x;
+    min-height: 100vh;
 }
 
 .center {

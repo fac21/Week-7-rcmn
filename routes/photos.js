@@ -14,6 +14,7 @@ function get(req, res) {
   .then((photos) => { 
    
     const photosArr = Object.values(photos);
+    console.log(photosArr)
     res.send(`
       <h2>Gallery</h2>
       <form enctype="multipart/form-data" method="post">
@@ -43,7 +44,7 @@ function get(req, res) {
         ${photosArr.map(photos => `
           <li>
             <h2>${photos.title}</h2>
-            <img src="${photos.photo}" alt="" width="64" height="64">
+            <img src="/photo-pic/${photos.id}" alt="" width="300" height="200">
           </li>
         `).join("")}
      </ul>

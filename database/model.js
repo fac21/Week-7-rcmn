@@ -59,7 +59,7 @@ return db.query(`INSERT INTO photos (user_id, title, tag, photo) VALUES ($1, $2,
 
 function getPhotoData() {
   const GET_PHOTO = `
-  SELECT photo, title, tag FROM photos
+  SELECT id, photo, title, tag FROM photos
   `;
   return db 
     .query(GET_PHOTO)
@@ -67,7 +67,8 @@ function getPhotoData() {
 }
 
 function getPhoto(id) {
-  return db.query("SELECT photo FROM photos WHERE id= $1", id);
+  return db.query("SELECT photo FROM photos WHERE id= $1", [id])
+  .then(result => result.rows[0]);
 }
 
 
